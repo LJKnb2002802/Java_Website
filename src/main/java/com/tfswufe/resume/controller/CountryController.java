@@ -9,8 +9,10 @@ import com.tfswufe.resume.domain.query.CompanyQuery;
 import com.tfswufe.resume.domain.query.CountryQuery;
 import com.tfswufe.resume.domain.vo.CompanyVO;
 import com.tfswufe.resume.domain.vo.CountryVO;
+import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.service.CompanyService;
 import com.tfswufe.resume.service.CountryService;
+import com.tfswufe.resume.utils.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,7 @@ public class CountryController {
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<CountryVO>> getPage(CountryQuery query) {
+        query.setColumns(QueryUtil.getColumns(CountryVO.class));
         final PageBean<Country> countryPageBean = countryService.getPageBean(query);
         final PageBean<CountryVO> pageBean = countryConverter.entityPageBean2voPageBean(countryPageBean);
         return ResultBean.ResultBeanUtil.success(pageBean);

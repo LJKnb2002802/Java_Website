@@ -36,7 +36,7 @@ class UserConverterTest {
         final PageBean<User> userPageBean = PageBean.page2pageBean(page);
         System.out.println(userPageBean);
 
-        final PageBean<UserVO> userVOPageBean = userConverter.userPageBean2userVOPageBean(userPageBean);
+        final PageBean<UserVO> userVOPageBean = userConverter.entityPageBean2voPageBean(userPageBean);
         System.out.println(userVOPageBean);
     }
 }

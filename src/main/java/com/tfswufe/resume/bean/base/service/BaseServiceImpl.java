@@ -21,7 +21,6 @@ public class BaseServiceImpl<E> extends ServiceImpl<BaseMapper<E>, E> implements
         final Integer pageNum = query.getPageNum();
         final Integer pageSize = query.getPageSize();
         IPage<E> page = new Page<>(pageNum, pageSize);
-        query.setColumns(QueryUtil.getColumns(UserVO.class));
 
         QueryWrapper<E> wrapper = QueryUtil.query2queryWrapper( query);
 

@@ -10,8 +10,10 @@ import com.tfswufe.resume.domain.query.CityQuery;
 import com.tfswufe.resume.domain.query.CompanyQuery;
 import com.tfswufe.resume.domain.vo.CityVo;
 import com.tfswufe.resume.domain.vo.CompanyVO;
+import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.service.CityService;
 import com.tfswufe.resume.service.CompanyService;
+import com.tfswufe.resume.utils.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,7 @@ public class CityController {
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<CityVo>> getPage(CityQuery query) {
+        query.setColumns(QueryUtil.getColumns(CityVo.class));
         final PageBean<City> cityPageBean = cityService.getPageBean(query);
         final PageBean<CityVo> pageBean = cityConverter.entityPageBean2voPageBean(cityPageBean);
         return ResultBean.ResultBeanUtil.success(pageBean);

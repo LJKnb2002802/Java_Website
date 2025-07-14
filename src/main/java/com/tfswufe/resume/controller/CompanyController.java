@@ -7,7 +7,9 @@ import com.tfswufe.resume.converter.CompanyConverter;
 import com.tfswufe.resume.domain.entity.Company;
 import com.tfswufe.resume.domain.query.CompanyQuery;
 import com.tfswufe.resume.domain.vo.CompanyVO;
+import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.service.CompanyService;
+import com.tfswufe.resume.utils.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +36,7 @@ public class CompanyController {
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<CompanyVO>> getPage(CompanyQuery query) {
+        query.setColumns(QueryUtil.getColumns(CompanyVO.class));
         final PageBean<Company> companyPageBean = companyService.getPageBean(query);
         final PageBean<CompanyVO> pageBean = companyConverter.entityPageBean2voPageBean(companyPageBean);
         return ResultBeanUtil.success(pageBean);

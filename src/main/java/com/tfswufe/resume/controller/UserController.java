@@ -8,6 +8,7 @@ import com.tfswufe.resume.domain.entity.User;
 import com.tfswufe.resume.domain.query.UserQuery;
 import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.service.UserService;
+import com.tfswufe.resume.utils.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class UserController {
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<UserVO>> getPage(UserQuery query) {
+        query.setColumns(QueryUtil.getColumns(UserVO.class));
         final PageBean<User> userPageBean = userService.getPageBean(query);
         final PageBean<UserVO> pageBean = userConverter.entityPageBean2voPageBean(userPageBean);
         return ResultBeanUtil.success(pageBean);

@@ -11,8 +11,10 @@ import com.tfswufe.resume.domain.query.ProvinceQuery;
 import com.tfswufe.resume.domain.vo.CompanyVO;
 import com.tfswufe.resume.domain.vo.CountryVO;
 import com.tfswufe.resume.domain.vo.ProvinceVO;
+import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.service.CompanyService;
 import com.tfswufe.resume.service.ProvinceService;
+import com.tfswufe.resume.utils.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +32,7 @@ public class ProvinceController {
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<ProvinceVO>> getPage(ProvinceQuery query) {
+        query.setColumns(QueryUtil.getColumns(ProvinceVO.class));
         final PageBean<Province> provincePageBean = provinceService.getPageBean(query);
         final PageBean<ProvinceVO> pageBean = provinceConverter.entityPageBean2voPageBean(provincePageBean);
         return ResultBean.ResultBeanUtil.success(pageBean);
