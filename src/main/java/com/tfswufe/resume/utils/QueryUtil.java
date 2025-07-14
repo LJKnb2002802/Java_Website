@@ -35,13 +35,16 @@ public class QueryUtil {
         }
         final PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
         for (PropertyDescriptor pd : pds) {
-            final String name = pd.getName();
+            // 字段的名称
+            String name = pd.getName();
             if("pageNum".equals(name) || "pageSize".equals(name) || "keywords".equals(name)){
                 continue;
             }
+            // 字段的类型
             final String type = pd.getPropertyType().getSimpleName();
-
+            //读取字段值的方法
             final Method readMethod = pd.getReadMethod();
+            //字段的值
             Object value = null;
             try {
                 value = readMethod.invoke(query,null);
@@ -49,6 +52,7 @@ public class QueryUtil {
                 e.printStackTrace();
             }
             if(value != null){
+                name = StringUtil.camel2underline(name);
                 if("String".equals(type)){
                     queryWrapper.like(name,value);
                 }else if(type.contains("[]") && value.getClass().isArray()){
@@ -70,3 +74,4 @@ public class QueryUtil {
         final QueryWrapper<User> wrapper = query2queryWrapper(userQuery);
     }
 }
+

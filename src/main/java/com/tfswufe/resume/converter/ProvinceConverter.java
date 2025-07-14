@@ -7,5 +7,5 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ProvinceConverter {
-    PageBean<ProvinceVO> provincePageBean2countryVOPageBean(PageBean<Province> companyPageBean);
+    PageBean<ProvinceVO> provincePageBean2provinceVOPageBean(PageBean<Province> companyPageBean);
 }

@@ -3,44 +3,41 @@ package com.tfswufe.resume.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.tfswufe.resume.bean.PageBean;
-import com.tfswufe.resume.converter.CityConverter;
-import com.tfswufe.resume.domain.entity.City;
-import com.tfswufe.resume.domain.query.CityQuery;
-import com.tfswufe.resume.domain.query.CountryQuery;
-import com.tfswufe.resume.domain.vo.CityVo;
-import com.tfswufe.resume.domain.vo.CountryVO;
-import jakarta.annotation.Resource;
-import org.apache.poi.ss.formula.functions.Count;
-import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tfswufe.resume.bean.PageBean;
+import com.tfswufe.resume.converter.CountryConverter;
 import com.tfswufe.resume.domain.entity.Country;
+import com.tfswufe.resume.domain.query.CountryQuery;
+import com.tfswufe.resume.domain.vo.CountryVO;
 import com.tfswufe.resume.mapper.CountryMapper;
 import com.tfswufe.resume.service.CountryService;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 @Service
 public class CountryServiceImpl extends ServiceImpl<CountryMapper, Country> implements CountryService {
     @Resource
-    private CityConverter cityConverter;
+    private CountryConverter countryConverter;
 
     @Override
     public PageBean<CountryVO> getPageBean(CountryQuery query) {
         final Integer pageNum = query.getPageNum();
         final Integer pageSize = query.getPageSize();
-        IPage<Count> page = new Page<>(pageNum, pageSize);
+        IPage<Country> page = new Page<>(pageNum, pageSize);
 
-        QueryWrapper<City> wrapper = new QueryWrapper<>();
+        QueryWrapper<Country> wrapper = new QueryWrapper<>();
         //动态SQL
         final String name = query.getName();
+
         if(name != null){
             wrapper.like("name",name);
         }
-        final String code = query.getCode();
+        final Integer code = query.getCode();
         if (code != null) {
             wrapper.like("code",code);
         }
-        final Long provinceId = query.getProvinceId();
-        if (provinceId != null) {
-            wrapper.like("provinceId",provinceId);
+        final Long cityId = query.getCityId();
+        if (cityId != null) {
+            wrapper.like("cityId",cityId);
         }
         final Integer priority = query.getPriority();
         if (priority != null) {
@@ -60,8 +57,8 @@ public class CountryServiceImpl extends ServiceImpl<CountryMapper, Country> impl
         }
 
         this.page(page, wrapper);
-        final PageBean<City> cityPageBean = PageBean.page2pageBean(page);
+        final PageBean<Country> countryPageBean = PageBean.page2pageBean(page);
 
-        return cityConverter.cityPageBean2cityVOPageBean(cityPageBean);
+        return countryConverter.countryPageBean2countryVOPageBean(countryPageBean);
     }
 }

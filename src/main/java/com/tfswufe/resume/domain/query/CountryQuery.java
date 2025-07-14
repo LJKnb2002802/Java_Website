@@ -1,5 +1,6 @@
 package com.tfswufe.resume.domain.query;
 
+import com.tfswufe.resume.bean.base.BaseQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CountryQuery {
+public class CountryQuery  extends BaseQuery {
     /**
      * 县名
      */
@@ -53,4 +54,5 @@ public class CountryQuery {
      */
     @Schema(description="备注")
     private String info;
+
 }
