@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tfswufe.resume.bean.PageBean;
+import com.tfswufe.resume.bean.base.service.BaseServiceImpl;
 import com.tfswufe.resume.converter.CountryConverter;
 import com.tfswufe.resume.domain.entity.Country;
 import com.tfswufe.resume.domain.query.CountryQuery;
@@ -14,51 +15,6 @@ import com.tfswufe.resume.service.CountryService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 @Service
-public class CountryServiceImpl extends ServiceImpl<CountryMapper, Country> implements CountryService {
-    @Resource
-    private CountryConverter countryConverter;
+public class CountryServiceImpl extends BaseServiceImpl<Country> implements CountryService {
 
-    @Override
-    public PageBean<CountryVO> getPageBean(CountryQuery query) {
-        final Integer pageNum = query.getPageNum();
-        final Integer pageSize = query.getPageSize();
-        IPage<Country> page = new Page<>(pageNum, pageSize);
-
-        QueryWrapper<Country> wrapper = new QueryWrapper<>();
-        //动态SQL
-        final String name = query.getName();
-
-        if(name != null){
-            wrapper.like("name",name);
-        }
-        final Integer code = query.getCode();
-        if (code != null) {
-            wrapper.like("code",code);
-        }
-        final Long cityId = query.getCityId();
-        if (cityId != null) {
-            wrapper.like("cityId",cityId);
-        }
-        final Integer priority = query.getPriority();
-        if (priority != null) {
-            wrapper.like("priority",priority);
-        }
-        final Boolean deleted = query.getDeleted();
-        if (deleted != null) {
-            wrapper.like("deleted",deleted);
-        }
-        final Integer state = query.getState();
-        if (state != null) {
-            wrapper.eq("state",state);
-        }
-        final String info = query.getInfo();
-        if(info != null){
-            wrapper.like("info",info);
-        }
-
-        this.page(page, wrapper);
-        final PageBean<Country> countryPageBean = PageBean.page2pageBean(page);
-
-        return countryConverter.countryPageBean2countryVOPageBean(countryPageBean);
-    }
 }

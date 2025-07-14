@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  *
  * @author hc
@@ -34,6 +36,12 @@ public class BaseQuery {
      */
     @Schema(description="关键字")
     private String keywords;
+
+    /**
+     * 待查询字段
+     * @return
+     */
+    private List<String> columns;
 
     public Integer getPageNum() {
         return pageNum ==null?1: pageNum;

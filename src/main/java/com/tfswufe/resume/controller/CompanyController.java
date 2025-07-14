@@ -3,6 +3,7 @@ package com.tfswufe.resume.controller;
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.ResultBean;
 import com.tfswufe.resume.bean.ResultBean.ResultBeanUtil;
+import com.tfswufe.resume.converter.CompanyConverter;
 import com.tfswufe.resume.domain.entity.Company;
 import com.tfswufe.resume.domain.query.CompanyQuery;
 import com.tfswufe.resume.domain.vo.CompanyVO;
@@ -28,10 +29,13 @@ import java.util.List;
 public class CompanyController {
     @Resource
     private CompanyService companyService;
+    @Resource
+    private CompanyConverter companyConverter;
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<CompanyVO>> getPage(CompanyQuery query) {
-        final PageBean<CompanyVO> pageBean = companyService.getPageBean(query);
+        final PageBean<Company> companyPageBean = companyService.getPageBean(query);
+        final PageBean<CompanyVO> pageBean = companyConverter.entityPageBean2voPageBean(companyPageBean);
         return ResultBeanUtil.success(pageBean);
     }
 
