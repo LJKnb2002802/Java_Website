@@ -1,5 +1,7 @@
 package com.tfswufe.resume.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.tfswufe.resume.bean.base.BaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,13 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserVO {
-    /**
-     * 编号
-     */
-    @Schema(description = "编号")
-    private Long id;
-
+public class UserVO extends BaseVO {
     /**
      * 昵称
      */
@@ -44,6 +40,7 @@ public class UserVO {
      * 生日
      */
     @Schema(description = "生日")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth;
 
     /**
@@ -63,10 +60,4 @@ public class UserVO {
      */
     @Schema(description = "状态")
     private Integer state;
-
-    /**
-     * 创建时间
-     */
-    @Schema(description = "创建时间")
-    private LocalDateTime createTime;
 }

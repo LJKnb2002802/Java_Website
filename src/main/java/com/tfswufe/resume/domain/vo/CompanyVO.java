@@ -1,6 +1,7 @@
 package com.tfswufe.resume.domain.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.tfswufe.resume.bean.base.BaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,12 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyVO  {
-    /**
-     * 编号
-     */
-    private Long id;
-
+public class CompanyVO extends BaseVO {
     /**
      * 企业名称
      */
@@ -52,10 +48,4 @@ public class CompanyVO  {
      */
     @Schema(description="状态")
     private Integer state;
-
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
 }

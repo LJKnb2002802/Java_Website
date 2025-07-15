@@ -1,5 +1,4 @@
 package com.tfswufe.resume.controller;
-
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.ResultBean;
 import com.tfswufe.resume.bean.ResultBean.ResultBeanUtil;
@@ -7,7 +6,6 @@ import com.tfswufe.resume.converter.CompanyConverter;
 import com.tfswufe.resume.domain.entity.Company;
 import com.tfswufe.resume.domain.query.CompanyQuery;
 import com.tfswufe.resume.domain.vo.CompanyVO;
-import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.service.CompanyService;
 import com.tfswufe.resume.utils.QueryUtil;
 import jakarta.annotation.Resource;
@@ -51,20 +49,20 @@ public class CompanyController {
     @GetMapping("/delete/{id}")
     public ResultBean<Void> delete(@PathVariable("id")Long id){
         companyService.removeById(id);
-        return ResultBeanUtil.success("根据ID删除单个用户成功",null);
+        return ResultBeanUtil.success("根据ID删除单个公司成功",null);
     }
 
     @GetMapping("/deletes/{ids}")
     public ResultBean<Void> deletes(@PathVariable("ids") String ids){
         final List<String> idList = Arrays.stream(ids.split(",")).toList();
         companyService.removeByIds(idList);
-        return ResultBeanUtil.success("根据ID批量删除用户成功",null);
+        return ResultBeanUtil.success("根据ID批量删除公司成功",null);
     }
 
     @PostMapping("/saveOrUpdate")
     public ResultBean<Void> saveOrUpdate(@RequestBody Company company){
         companyService.saveOrUpdate(company);
-        return ResultBeanUtil.success("添加或修改用户成功！",null);
+        return ResultBeanUtil.success("添加或修改公司成功！",null);
     }
 
 }
