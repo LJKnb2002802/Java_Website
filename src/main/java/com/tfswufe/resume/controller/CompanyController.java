@@ -2,7 +2,10 @@ package com.tfswufe.resume.controller;
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.ResultBean;
 import com.tfswufe.resume.bean.ResultBean.ResultBeanUtil;
+import com.tfswufe.resume.bean.base.BaseController;
+import com.tfswufe.resume.bean.base.service.BaseService;
 import com.tfswufe.resume.converter.CompanyConverter;
+import com.tfswufe.resume.domain.entity.City;
 import com.tfswufe.resume.domain.entity.Company;
 import com.tfswufe.resume.domain.query.CompanyQuery;
 import com.tfswufe.resume.domain.vo.CompanyVO;
@@ -26,11 +29,15 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/company")
-public class CompanyController {
+public class CompanyController extends BaseController<Company> {
     @Resource
     private CompanyService companyService;
     @Resource
     private CompanyConverter companyConverter;
+
+    public CompanyController(BaseService<Company> baseService) {
+        super(baseService);
+    }
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<CompanyVO>> getPage(CompanyQuery query) {
@@ -38,31 +45,6 @@ public class CompanyController {
         final PageBean<Company> companyPageBean = companyService.getPageBean(query);
         final PageBean<CompanyVO> pageBean = companyConverter.entityPageBean2voPageBean(companyPageBean);
         return ResultBeanUtil.success(pageBean);
-    }
-
-    @GetMapping("/getDetails/{id}")
-    public ResultBean<Company> getDetails(@PathVariable("id")Long id){
-        final Company company = companyService.getById(id);
-        return ResultBeanUtil.success(company);
-    }
-
-    @GetMapping("/delete/{id}")
-    public ResultBean<Void> delete(@PathVariable("id")Long id){
-        companyService.removeById(id);
-        return ResultBeanUtil.success("根据ID删除单个公司成功",null);
-    }
-
-    @GetMapping("/deletes/{ids}")
-    public ResultBean<Void> deletes(@PathVariable("ids") String ids){
-        final List<String> idList = Arrays.stream(ids.split(",")).toList();
-        companyService.removeByIds(idList);
-        return ResultBeanUtil.success("根据ID批量删除公司成功",null);
-    }
-
-    @PostMapping("/saveOrUpdate")
-    public ResultBean<Void> saveOrUpdate(@RequestBody Company company){
-        companyService.saveOrUpdate(company);
-        return ResultBeanUtil.success("添加或修改公司成功！",null);
     }
 
 }

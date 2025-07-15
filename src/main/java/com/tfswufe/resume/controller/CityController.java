@@ -2,6 +2,7 @@ package com.tfswufe.resume.controller;
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.ResultBean;
 import com.tfswufe.resume.bean.ResultBean.ResultBeanUtil;
+import com.tfswufe.resume.bean.base.BaseController;
 import com.tfswufe.resume.converter.CityConverter;
 import com.tfswufe.resume.domain.entity.City;
 import com.tfswufe.resume.domain.query.CityQuery;
@@ -26,11 +27,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/city")
-public class CityController {
+public class CityController extends BaseController<City> {
     @Resource
     private CityService cityService;
     @Resource
     private CityConverter cityConverter;
+
+    public CityController(CityService cityService) {
+        super(cityService);
+    }
+
 
     @GetMapping("/getPage")
     public ResultBean<PageBean<CityVO>> getPage(CityQuery query) {
@@ -39,30 +45,4 @@ public class CityController {
         final PageBean<CityVO> pageBean = cityConverter.entityPageBean2voPageBean(cityPageBean);
         return ResultBeanUtil.success(pageBean);
     }
-
-    @GetMapping("/getDetails/{id}")
-    public ResultBean<City> getDetails(@PathVariable("id")Long id){
-        final City city = cityService.getById(id);
-        return ResultBeanUtil.success(city);
-    }
-
-    @GetMapping("/delete/{id}")
-    public ResultBean<Void> delete(@PathVariable("id")Long id){
-        cityService.removeById(id);
-        return ResultBeanUtil.success("根据ID删除单个城市成功",null);
-    }
-
-    @GetMapping("/deletes/{ids}")
-    public ResultBean<Void> deletes(@PathVariable("ids") String ids){
-        final List<String> idList = Arrays.stream(ids.split(",")).toList();
-        cityService.removeByIds(idList);
-        return ResultBeanUtil.success("根据ID批量删除城市成功",null);
-    }
-
-    @PostMapping("/saveOrUpdate")
-    public ResultBean<Void> saveOrUpdate(@RequestBody City city){
-        cityService.saveOrUpdate(city);
-        return ResultBeanUtil.success("添加或修改城市成功！",null);
-    }
-
 }
