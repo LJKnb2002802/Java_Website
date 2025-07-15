@@ -1,4 +1,5 @@
 package com.tfswufe.resume.controller;
+
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.ResultBean;
 import com.tfswufe.resume.bean.ResultBean.ResultBeanUtil;
@@ -11,14 +12,8 @@ import com.tfswufe.resume.service.CityService;
 import com.tfswufe.resume.utils.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
@@ -45,4 +40,11 @@ public class CityController extends BaseController<City> {
         final PageBean<CityVO> pageBean = cityConverter.entityPageBean2voPageBean(cityPageBean);
         return ResultBeanUtil.success(pageBean);
     }
+
+    @GetMapping("/fun")
+    public ResultBean<String> fun(){
+        System.out.println(3/0);
+        return ResultBeanUtil.success();
+    }
+
 }

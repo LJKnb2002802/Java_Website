@@ -6,7 +6,7 @@ import com.tfswufe.resume.bean.base.service.BaseService;
 import com.tfswufe.resume.domain.entity.City;
 import com.tfswufe.resume.domain.entity.Company;
 import com.tfswufe.resume.domain.query.CityQuery;
-import com.tfswufe.resume.domain.vo.CityVo;
+import com.tfswufe.resume.domain.vo.CityVO;
 
 public interface CityService extends BaseService<City> {
 }

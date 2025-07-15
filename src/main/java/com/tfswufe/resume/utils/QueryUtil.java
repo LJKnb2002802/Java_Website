@@ -3,6 +3,7 @@ package com.tfswufe.resume.utils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tfswufe.resume.bean.base.BaseQuery;
 import com.tfswufe.resume.domain.vo.UserVO;
+import com.tfswufe.resume.ex.ResumeException;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -37,7 +38,7 @@ public class QueryUtil {
             beanInfo = Introspector.getBeanInfo(query.getClass(), Object.class);
         } catch (IntrospectionException e) {
             e.printStackTrace();
-            throw new RuntimeException("获取BeanInfo时发生异常");
+            throw new ResumeException("获取BeanInfo时发生异常");
         }
         final PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
         for (PropertyDescriptor pd : pds) {
@@ -53,9 +54,10 @@ public class QueryUtil {
             //字段的值
             Object value = null;
             try {
-                value = readMethod.invoke(query, null);
+                value = readMethod.invoke(query);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
+                throw new ResumeException("获取字段值时发生异常");
             }
             if (value != null) {
                 name = StringUtil.camel2underline(name);
@@ -104,4 +106,3 @@ public class QueryUtil {
         //final QueryWrapper<User> wrapper = query2queryWrapper(userQuery);
     }
 }
-
