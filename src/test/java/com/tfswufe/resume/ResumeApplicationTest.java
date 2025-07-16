@@ -1,7 +1,13 @@
 package com.tfswufe.resume;
 
+import com.tfswufe.resume.domain.query.UserQuery;
+
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Random;
 
 public class ResumeApplicationTest {
     //public static void main(String[] args) throws JsonProcessingException {
@@ -34,33 +40,50 @@ public class ResumeApplicationTest {
 //        }
 //    }
 
-    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, InvocationTargetException {
-        //获取到类的字节码
-        //final Class clazz = Dept.class;
-        //
-        //final Method[] methods = clazz.getMethods();
-        //for (Method method : methods) {
-        //    System.out.println(method.getName());
-        //}
-
-        final Dept dept = new Dept(10,"sales","newyork");
-        // 获取到对象的字节码
-        // 获取Dept类的Class对象
-        Class clazz2 = dept.getClass();
-        // 获取Class对象中所有的公共方法，包括继承自父类的方法
-        final Method[] methods2 = clazz2.getMethods();
-        // 遍历所有方法
-        for (Method method : methods2) {
-            // 获取方法名
-            final String methodName = method.getName();
-            // 打印方法名
-            System.out.println(methodName);
-            // 检查方法名是否以"get"开头，这是JavaBean中获取属性值的方法的命名规范
-            if (methodName.startsWith("get")) {
-                // 使用反射调用方法，并打印返回值
-                Object res = method.invoke(dept, null);
-                System.out.println(res);
-            }
-        }
+//    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, InvocationTargetException {
+//        //获取到类的字节码
+//        //final Class clazz = Dept.class;
+//        //
+//        //final Method[] methods = clazz.getMethods();
+//        //for (Method method : methods) {
+//        //    System.out.println(method.getName());
+//        //}
+//
+//        final Dept dept = new Dept(10,"sales","newyork");
+//        // 获取到对象的字节码
+//        // 获取Dept类的Class对象
+//        Class clazz2 = dept.getClass();
+//        // 获取Class对象中所有的公共方法，包括继承自父类的方法
+//        final Method[] methods2 = clazz2.getMethods();
+//        // 遍历所有方法
+//        for (Method method : methods2) {
+//            // 获取方法名
+//            final String methodName = method.getName();
+//            // 打印方法名
+//            System.out.println(methodName);
+//            // 检查方法名是否以"get"开头，这是JavaBean中获取属性值的方法的命名规范
+//            if (methodName.startsWith("get")) {
+//                // 使用反射调用方法，并打印返回值
+//                Object res = method.invoke(dept, null);
+//                System.out.println(res);
+//            }
+//        }
+//    }
+public static void main(String[] args) throws Exception {
+    final UserQuery userQuery = new UserQuery();
+    //内省
+    final BeanInfo beanInfo = Introspector.getBeanInfo(userQuery.getClass(), Object.class );
+    final PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+    for (PropertyDescriptor pd : pds) {
+        System.out.println(pd.getName());
+        System.out.println(pd.getPropertyType());
+        final Method readMethod = pd.getReadMethod();
+        final Method writeMethod = pd.getWriteMethod();
+        System.out.println();
     }
+    final Random random = new Random();
+    int digit = random.nextInt(100);
+    digit = digit%3;
+    System.out.println(digit);
+}
 }

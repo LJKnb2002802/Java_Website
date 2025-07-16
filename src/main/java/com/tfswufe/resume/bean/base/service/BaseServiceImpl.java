@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.base.BaseQuery;
-import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.utils.QueryUtil;
 
 /**
@@ -22,7 +21,7 @@ public class BaseServiceImpl<E> extends ServiceImpl<BaseMapper<E>, E> implements
         final Integer pageSize = query.getPageSize();
         IPage<E> page = new Page<>(pageNum, pageSize);
 
-        QueryWrapper<E> wrapper = QueryUtil.query2queryWrapper( query);
+        QueryWrapper<E> wrapper = QueryUtil.query2queryWrapper(query);
 
         this.page(page, wrapper);
         return PageBean.page2pageBean(page);

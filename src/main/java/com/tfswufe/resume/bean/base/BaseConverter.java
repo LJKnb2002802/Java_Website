@@ -9,6 +9,6 @@ import com.tfswufe.resume.bean.PageBean;
  * @param <E> 实体类
  * @param <V> VO视图类
  */
-public interface BaseConverter<E,V> {
+public interface BaseConverter<E extends BaseEntity, V extends BaseVO> {
     PageBean<V> entityPageBean2voPageBean(PageBean<E> entityPageBean);
 }

@@ -42,9 +42,13 @@ public class CityController extends BaseController<City> {
     }
 
     @GetMapping("/fun")
-    public ResultBean<String> fun(){
-        System.out.println(3/0);
-        return ResultBeanUtil.success();
+    public String fun(){
+        return "hahaha";
+    }
+
+    @GetMapping("/fun2")
+    public String fun2() {
+        return "xixi";
     }
 
 }

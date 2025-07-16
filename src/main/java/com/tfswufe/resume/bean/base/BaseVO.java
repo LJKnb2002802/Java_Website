@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class BaseVO {
+public class    BaseVO {
     /**
      * 编号
      */
