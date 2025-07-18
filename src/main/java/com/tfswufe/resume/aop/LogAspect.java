@@ -51,8 +51,8 @@ public class LogAspect {
         final String ip = IPUtil.getIpAddr(request);
         final String uri = request.getRequestURI();
         final String methodType = request.getMethod();
-        final Map<String, String[]> parameterMap = request.getParameterMap();
-        final String paramterJson = JsonUtil.obj2string(parameterMap);
+        final Map<String, String[]> paramMap = request.getParameterMap();
+        final String paramJson = JsonUtil.obj2string(paramMap);
         Object result = joinPoint.proceed();
         final long duration = System.nanoTime() - start;
 
@@ -66,7 +66,7 @@ public class LogAspect {
             logBean.setIp(ip);
             logBean.setUrl(uri);
             logBean.setMethod(methodType);
-            logBean.setParams(paramterJson);
+            logBean.setParams(paramJson);
             logBean.setDuration(duration);
             logBean.setResult(JsonUtil.obj2string(result));
             logBean.setDeleted(false);

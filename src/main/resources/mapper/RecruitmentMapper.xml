@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfswufe.resume.mapper.RecruitmentMapper">
+  <resultMap id="BaseResultMap" type="com.tfswufe.resume.domain.entity.Recruitment">
+    <!--@mbg.generated-->
+    <!--@Table tb_recruitment-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="job_title" jdbcType="VARCHAR" property="jobTitle" />
+    <result column="job_desc" jdbcType="LONGVARCHAR" property="jobDesc" />
+    <result column="job_requirements" jdbcType="LONGVARCHAR" property="jobRequirements" />
+    <result column="dname" jdbcType="VARCHAR" property="dname" />
+    <result column="loc" jdbcType="VARCHAR" property="loc" />
+    <result column="salary_range" jdbcType="VARCHAR" property="salaryRange" />
+    <result column="experience_required" jdbcType="VARCHAR" property="experienceRequired" />
+    <result column="edu_required" jdbcType="VARCHAR" property="eduRequired" />
+    <result column="recruitment_number" jdbcType="INTEGER" property="recruitmentNumber" />
+    <result column="job_type" jdbcType="TINYINT" property="jobType" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="valid_time" jdbcType="TIMESTAMP" property="validTime" />
+    <result column="contact_person" jdbcType="VARCHAR" property="contactPerson" />
+    <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
+    <result column="contact_email" jdbcType="VARCHAR" property="contactEmail" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="info" jdbcType="LONGVARCHAR" property="info" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, job_title, job_desc, job_requirements, dname, loc, salary_range, experience_required, 
+    edu_required, recruitment_number, job_type, publish_time, valid_time, contact_person, 
+    contact_phone, contact_email, company_id, `state`, info, priority, deleted, create_time, 
+    update_time
+  </sql>
+</mapper>

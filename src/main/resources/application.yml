@@ -3,7 +3,12 @@ server:
   servlet:
     context-path: /resume
 
+
 spring:
+  web:
+    resources:
+      #  临时的图片资源服务器
+      static-locations: classpath:/static/,classpath:/templates/,file:/D:/Git/Java_Website/images/
   #配置数据源
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
