@@ -1,5 +1,8 @@
 package com.tfswufe.resume.config;
 
-public interface  GlobalConstant {
-    Integer PAGE_SIZE =16;
+public interface GlobalConstant {
+    /**
+     * 默认页面大小
+     */
+    Integer PAGE_SIZE = 5;
 }

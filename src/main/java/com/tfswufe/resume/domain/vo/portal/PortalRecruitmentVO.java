@@ -1,6 +1,6 @@
-package com.tfswufe.resume.domain.query;
+package com.tfswufe.resume.domain.vo.portal;
 
-import com.tfswufe.resume.bean.base.BaseQuery;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,36 +17,23 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecruitmentQuery extends BaseQuery {
+public class PortalRecruitmentVO {
+    /**
+     * 编号
+     */
+    @Schema(description = "编号")
+    private Long id;
+
     /**
      * 职位名称
      */
     @Schema(description = "职位名称")
     private String jobTitle;
-
-    /**
-     * 职位描述
-     */
-    @Schema(description = "职位描述")
-    private String jobDesc;
-
     /**
      * 职位需求
      */
     @Schema(description = "职位需求")
     private String jobRequires;
-
-    /**
-     * 职位要求
-     */
-    @Schema(description = "职位要求")
-    private String jobRequirements;
-
-    /**
-     * 所属部门
-     */
-    @Schema(description = "所属部门")
-    private String dname;
 
     /**
      * 工作地点
@@ -59,12 +46,6 @@ public class RecruitmentQuery extends BaseQuery {
      */
     @Schema(description = "薪资范围")
     private String salaryRange;
-
-    /**
-     * 经验要求
-     */
-    @Schema(description = "经验要求")
-    private String experienceRequired;
 
     /**
      * 学历要求
@@ -85,21 +66,38 @@ public class RecruitmentQuery extends BaseQuery {
     private LocalDateTime publishTime;
 
     /**
+     * 联系人
+     */
+    @Schema(description = "联系人")
+    private String contactName;
+
+    /**
+     * 联系人头像
+     */
+    @Schema(description = "联系人头像")
+    private String contactAvatar;
+
+    /**
+     * 公司ID
+     */
+    @Schema(description = "公司ID")
+    private Long companyId;
+
+    /**
      * 公司名称
      */
     @Schema(description = "公司名称")
     private String companyName;
 
     /**
-     * 状态(1:招聘中, 2:已暂停, 3:已结束)
+     * 联系人职务
      */
-
-    @Schema(description = "状态(1:招聘中, 2:已暂停, 3:已结束)")
-    private Integer state;
+    @Schema(description = "联系人职务")
+    private String contactDuty;
 
     /**
-     * 备注
+     * 联系电话
      */
-    @Schema(description = "备注")
-    private String info;
+    @Schema(description = "联系电话")
+    private String contactPhone;
 }

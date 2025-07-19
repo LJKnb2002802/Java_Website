@@ -62,20 +62,26 @@ public class QueryUtil {
             if (value != null) {
                 name = StringUtil.camel2underline(name);
                 if ("String".equals(type)) {
-                    queryWrapper.like(name, value);
+                    queryWrapper.or().like(name, value);
                 } else if (type.contains("[]") && value.getClass().isArray()) {
                     Object[] values = (Object[]) value;
-                    queryWrapper.between(name, values[0], values[1]);
+                    queryWrapper.or().between(name, values[0], values[1]);
                 } else {
-                    queryWrapper.eq(name, value);
+                    queryWrapper.or().eq(name, value);
                 }
             }
+            // 如果有字段priority，则按照优先级排序
+            if ("priority".equals(name)) {
+                queryWrapper.orderByDesc("priority");
+            }
         }
+        // 默认按照创建时间倒序排序
+        queryWrapper.orderByDesc("create_time");
         return queryWrapper;
     }
 
     /**
-     * 获取指定类的所有字段
+     * 获取指定类（及其父类，一直到祖先类Object）的所有字段
      * @param clazz 实体类
      * @return 字段列表
      */
@@ -89,7 +95,7 @@ public class QueryUtil {
             }
             clazz = clazz.getSuperclass();
             clazzName = clazz.getSimpleName();
-        } while (!clazzName.equals("Object"));
+        } while (!"Object".equals(clazzName));
         return columns;
     }
 

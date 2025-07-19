@@ -9,7 +9,7 @@
     <id>resume</id>
 
     <classpath>
-        <dir name="D:/resume/target/classes">
+        <dir name="D:/Git/Java_Website/resume/target/classes">
         </dir>
     </classpath>
 
