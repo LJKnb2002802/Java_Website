@@ -10,7 +10,7 @@ import com.tfswufe.resume.domain.entity.Recruitment;
 import com.tfswufe.resume.domain.query.RecruitmentQuery;
 import com.tfswufe.resume.domain.vo.RecruitmentVO;
 import com.tfswufe.resume.service.RecruitmentService;
-import com.tfswufe.resume.utils.QueryUtil;
+import com.tfswufe.resume.utils.mybatisplus.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

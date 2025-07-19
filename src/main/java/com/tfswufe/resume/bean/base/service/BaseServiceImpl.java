@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.base.BaseQuery;
-import com.tfswufe.resume.utils.QueryUtil;
+import com.tfswufe.resume.utils.mybatisplus.QueryUtil;
 
 /**
  *

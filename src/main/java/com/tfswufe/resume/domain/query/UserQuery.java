@@ -1,6 +1,10 @@
 package com.tfswufe.resume.domain.query;
 
 import com.tfswufe.resume.bean.base.BaseQuery;
+import com.tfswufe.resume.utils.mybatisplus.Logic;
+import com.tfswufe.resume.utils.mybatisplus.annos.Between;
+import com.tfswufe.resume.utils.mybatisplus.annos.EQ;
+import com.tfswufe.resume.utils.mybatisplus.annos.Like;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,18 +29,21 @@ public class UserQuery extends BaseQuery {
     /**
      * 昵称
      */
+    @Like
     @Schema(description = "昵称")
     private String nickname;
 
     /**
      * 性别
      */
+    @EQ(logic = Logic.OR)
     @Schema(description = "性别")
     private Boolean gender;
 
     /**
      * 生日
      */
+    @Between
     @Schema(description = "生日")
     private LocalDate[] birth;
 

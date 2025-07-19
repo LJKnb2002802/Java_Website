@@ -2,17 +2,15 @@ package com.tfswufe.resume.controller;
 
 import com.tfswufe.resume.bean.PageBean;
 import com.tfswufe.resume.bean.ResultBean;
+import com.tfswufe.resume.bean.ResultBean.ResultBeanUtil;
 import com.tfswufe.resume.bean.base.BaseController;
 import com.tfswufe.resume.bean.base.service.BaseService;
 import com.tfswufe.resume.converter.LogConverter;
-import com.tfswufe.resume.domain.entity.Country;
 import com.tfswufe.resume.domain.entity.Log;
-import com.tfswufe.resume.domain.query.CountryQuery;
 import com.tfswufe.resume.domain.query.LogQuery;
-import com.tfswufe.resume.domain.vo.CountryVO;
 import com.tfswufe.resume.domain.vo.LogVO;
 import com.tfswufe.resume.service.LogService;
-import com.tfswufe.resume.utils.QueryUtil;
+import com.tfswufe.resume.utils.mybatisplus.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +38,7 @@ public class LogController extends BaseController<Log> {
         query.setColumns(QueryUtil.getColumns(LogVO.class));
         final PageBean<Log> logPageBean = logService.getPageBean(query);
         final PageBean<LogVO> pageBean = logConverter.entityPageBean2voPageBean(logPageBean);
-        return ResultBean.ResultBeanUtil.success(pageBean);
+        return ResultBeanUtil.success(pageBean);
     }
+
 }

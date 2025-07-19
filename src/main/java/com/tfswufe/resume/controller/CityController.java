@@ -9,7 +9,7 @@ import com.tfswufe.resume.domain.entity.City;
 import com.tfswufe.resume.domain.query.CityQuery;
 import com.tfswufe.resume.domain.vo.CityVO;
 import com.tfswufe.resume.service.CityService;
-import com.tfswufe.resume.utils.QueryUtil;
+import com.tfswufe.resume.utils.mybatisplus.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,16 +39,6 @@ public class CityController extends BaseController<City> {
         final PageBean<City> cityPageBean = cityService.getPageBean(query);
         final PageBean<CityVO> pageBean = cityConverter.entityPageBean2voPageBean(cityPageBean);
         return ResultBeanUtil.success(pageBean);
-    }
-
-    @GetMapping("/fun")
-    public String fun(){
-        return "hahaha";
-    }
-
-    @GetMapping("/fun2")
-    public String fun2() {
-        return "xixi";
     }
 
 }

@@ -10,17 +10,11 @@ import com.tfswufe.resume.domain.entity.User;
 import com.tfswufe.resume.domain.query.UserQuery;
 import com.tfswufe.resume.domain.vo.UserVO;
 import com.tfswufe.resume.service.UserService;
-import com.tfswufe.resume.utils.QueryUtil;
+import com.tfswufe.resume.utils.mybatisplus.QueryUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
@@ -46,4 +40,5 @@ public class UserController extends BaseController<User> {
         final PageBean<UserVO> pageBean = userConverter.entityPageBean2voPageBean(userPageBean);
         return ResultBeanUtil.success(pageBean);
     }
+
 }
